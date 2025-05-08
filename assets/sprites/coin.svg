@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="20" viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+  <!-- 6 frames of coin animation (20px each) -->
+  <!-- Frame 1 -->
+  <circle cx="10" cy="10" r="8" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="10" cy="10" r="5" fill="#ffdd55"/>
+  
+  <!-- Frame 2 -->
+  <circle cx="30" cy="10" r="7" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="30" cy="10" r="4" fill="#ffdd55"/>
+  
+  <!-- Frame 3 -->
+  <circle cx="50" cy="10" r="6" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="50" cy="10" r="3" fill="#ffdd55"/>
+  
+  <!-- Frame 4 -->
+  <circle cx="70" cy="10" r="5" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="70" cy="10" r="2" fill="#ffdd55"/>
+  
+  <!-- Frame 5 -->
+  <circle cx="90" cy="10" r="6" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="90" cy="10" r="3" fill="#ffdd55"/>
+  
+  <!-- Frame 6 -->
+  <circle cx="110" cy="10" r="7" fill="#ffcc00" stroke="#ff9900" stroke-width="1"/>
+  <circle cx="110" cy="10" r="4" fill="#ffdd55"/>
+</svg>

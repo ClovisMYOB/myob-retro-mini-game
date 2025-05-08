@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYOB Retro Runner</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <div class="score-container">
+                <span>Score: </span>
+                <span id="score">0</span>
+            </div>
+            <div class="high-score-container">
+                <span>High Score: </span>
+                <span id="high-score">0</span>
+            </div>
+        </div>
+        <canvas id="game-canvas"></canvas>
+        <div class="game-controls">
+            <p>Press SPACE or UP ARROW to jump. Press twice for double jump!</p>
+            <button id="start-button">Start Game</button>
+            <button id="restart-button" style="display: none;">Restart Game</button>
+        </div>
+    </div>
+    <div id="game-over" class="game-over" style="display: none;">
+        <h2>Game Over!</h2>
+        <p>Your score: <span id="final-score">0</span></p>
+        <button id="restart-game">Play Again</button>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/player.js"></script>
+    <script src="js/obstacle.js"></script>
+    <script src="js/coin.js"></script>
+    <script src="js/spawn-manager.js"></script>
+    <script src="js/powerups.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/game.js"></script>
+    <script type="module" src="tests/canvas_browser_and_functionality_tests.js"></script>
+</body>
+</html>
