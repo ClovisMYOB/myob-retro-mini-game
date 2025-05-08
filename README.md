@@ -55,16 +55,6 @@ myob-retro-mini-game/
 └── README.md           # Project documentation
 ```
 
-## Running Tests
-1. Install [Jest](https://jestjs.io/) globally or locally:
-   ```bash
-   npm install jest --global
-   ```
-2. Run the tests:
-   ```bash
-   jest
-   ```
-
 ## Running Browser-Based Tests
 
 The project includes browser-based tests located in the `tests/canvas_browser_and_functionality_tests.js` file. These tests are automatically executed when you open the `index.html` file in your browser. The tests validate the functionality of various game components, including canvas rendering and game logic.
