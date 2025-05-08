@@ -34,19 +34,24 @@ class Game {
         
         // Background
         this.backgroundImg = new Image();
-        this.backgroundImg.src = 'assets/sprites/background.svg'; // Changed from .png to .svg
-        this.backgroundLoaded = false;
         
         // Add error handling for background loading
         this.backgroundImg.onload = () => {
-            this.backgroundLoaded = true;
             console.log('Background image loaded successfully');
+            // Force a redraw of the static screen once the image is loaded
+            this.drawStatic();
         };
         
         this.backgroundImg.onerror = () => {
-            console.warn('Failed to load background image. Using fallback.');
-            this.backgroundLoaded = false;
+            console.warn('Failed to load background image. Retrying with another path...');
+            // Try loading with a fallback path or retry the same path
+            setTimeout(() => {
+                this.backgroundImg.src = 'assets/sprites/background.svg?v=' + new Date().getTime();
+            }, 1000);
         };
+        
+        // Set the source after defining the event handlers
+        this.backgroundImg.src = 'assets/sprites/background.svg'; // Changed from .png to .svg
         
         this.backgroundX = 0;
         this.backgroundSpeed = 2;
@@ -269,14 +274,14 @@ class Game {
      * Draw background with parallax scrolling
      */
     drawBackground() {
-        // Draw parallax background if image is loaded
-        if (this.backgroundLoaded) {
-            // Scroll background
-            this.backgroundX -= this.backgroundSpeed;
-            if (this.backgroundX <= -this.canvas.width) {
-                this.backgroundX = 0;
-            }
-            
+        // Scroll background
+        this.backgroundX -= this.backgroundSpeed;
+        if (this.backgroundX <= -this.canvas.width) {
+            this.backgroundX = 0;
+        }
+        
+        // Check if the image is loaded and complete before drawing
+        if (this.backgroundImg.complete && this.backgroundImg.naturalHeight !== 0) {
             // Draw background twice for seamless scrolling
             this.ctx.drawImage(
                 this.backgroundImg, 
@@ -293,30 +298,9 @@ class Game {
                 this.canvas.height
             );
         } else {
-            // Fallback background gradient
-            const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-            gradient.addColorStop(0, '#000033');
-            gradient.addColorStop(1, '#000066');
-            this.ctx.fillStyle = gradient;
+            // Temporary solid color background until image loads
+            this.ctx.fillStyle = '#000033';
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-            
-            // Add some stars to the fallback background
-            this.drawStars();
-        }
-    }
-    
-    /**
-     * Draw stars in the fallback background
-     */
-    drawStars() {
-        this.ctx.fillStyle = 'white';
-        // Create a starfield effect with fixed positions
-        for(let i = 0; i < 100; i++) {
-            // Use fixed positions based on index to ensure stars don't flicker
-            const x = (i * 17) % this.canvas.width;
-            const y = (i * 23) % this.canvas.height;
-            const size = (i % 3) + 1;
-            this.ctx.fillRect(x, y, size, size);
         }
     }
 
@@ -336,35 +320,48 @@ class Game {
         this.drawBackground();
         this.drawGround();
         
-        // Draw title with purple theme instead of blue
-        this.ctx.fillStyle = '#8a2be2'; // Changed from '#00a3e0' to purple
-        this.ctx.font = '40px "Courier New", Courier, monospace';
+        // Create a semi-transparent black background for instructions
+        const instructionsX = this.canvas.width / 2 - 380;
+        const instructionsY = this.canvas.height / 2 - 170;
+        const instructionsWidth = 750;
+        const instructionsHeight = 330;
+        
+        // Draw the semi-transparent background
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        this.ctx.fillRect(instructionsX, instructionsY, instructionsWidth, instructionsHeight);
+        
+        // Add a border to the background
+        this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeRect(instructionsX, instructionsY, instructionsWidth, instructionsHeight);
+        
+        this.ctx.fillStyle = '#4b0082'; // Dark purple color for consistency
         this.ctx.textAlign = 'center';
-        this.ctx.fillText('MYOB Retro Runner', this.canvas.width / 2, this.canvas.height / 2 - 60);
         
         // Draw expanded instructions with more details
         this.ctx.font = '18px "Courier New", Courier, monospace';
-        this.ctx.fillText('Press SPACE or UP ARROW to jump', this.canvas.width / 2, this.canvas.height / 2 - 20);
-        this.ctx.fillText('Press SPACE while in mid-air to double jump!', this.canvas.width / 2, this.canvas.height / 2 + 5);
-        this.ctx.fillText('Press SHIFT or RIGHT ARROW to attack enemies', this.canvas.width / 2, this.canvas.height / 2 + 30);
+        this.ctx.fillStyle = '#ffffff'; // White text for better contrast on dark background
+        this.ctx.fillText('Press SPACE or UP ARROW to jump', this.canvas.width / 2, this.canvas.height / 2 - 130);
+        this.ctx.fillText('Press SPACE while in mid-air to double jump!', this.canvas.width / 2, this.canvas.height / 2 - 1055);
+        this.ctx.fillText('Press SHIFT or RIGHT ARROW to attack', this.canvas.width / 2, this.canvas.height / 2 - 80);
         
         // Add the new attack invincibility instruction with blue color to match the visual effect
         this.ctx.fillStyle = '#4466ff';
-        this.ctx.fillText('Attacking gives brief invincibility - time it right to smash obstacles!', this.canvas.width / 2, this.canvas.height / 2 + 55);
+        this.ctx.fillText('Attacking gives brief invincibility - time it right to smash!', this.canvas.width / 2, this.canvas.height / 2 - 30);
         
         // Back to regular white text for general instructions
         this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillText('Collect coins and avoid obstacles', this.canvas.width / 2, this.canvas.height / 2 + 80);
+        this.ctx.fillText('Collect coins and smash obstacles & enemies to score', this.canvas.width / 2, this.canvas.height / 2 + 20);
         
         // Add powerup explanations
         this.ctx.fillStyle = '#ffcc00'; // Gold color for powerup text
-        this.ctx.fillText('Every 20 points: Regular powerup - Temporary invincibility', this.canvas.width / 2, this.canvas.height / 2 + 110);
+        this.ctx.fillText('Every 20 points: Regular powerup - Temporary invincibility', this.canvas.width / 2, this.canvas.height / 2 + 80);
         this.ctx.fillStyle = '#ff3333'; // Red color for super powerup text
-        this.ctx.fillText('Every 100 points: Super powerup - Invincibility + infinite jumps!', this.canvas.width / 2, this.canvas.height / 2 + 135);
+        this.ctx.fillText('Every 100 points: Super powerup - Invincibility + infinite jumps!', this.canvas.width / 2, this.canvas.height / 2 + 105);
         
         // Add enter key instruction
         this.ctx.fillStyle = '#ffffff';
-        this.ctx.fillText('Press ENTER to restart when game over', this.canvas.width / 2, this.canvas.height / 2 + 165);
+        this.ctx.fillText('Press ENTER to restart when game over', this.canvas.width / 2, this.canvas.height / 2 + 135);
     }
 
     /**

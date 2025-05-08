@@ -30,11 +30,11 @@ body {
     margin-bottom: 10px;
     font-size: 24px;
     font-weight: bold;
-    color: #00a3e0; /* MYOB brand color */
+    color: #4b0082; /* Changed from MYOB blue to dark purple */
 }
 
 #game-canvas {
-    border: 4px solid #00a3e0; /* MYOB brand color */
+    border: 4px solid #4b0082; /* Changed from MYOB blue to dark purple */
     background-color: #000000;
     image-rendering: pixelated; /* Makes scaled images have a pixelated appearance */
     width: 800px;
@@ -52,7 +52,7 @@ body {
 }
 
 button {
-    background-color: #00a3e0; /* MYOB brand color */
+    background-color: #4b0082; /* Changed from MYOB blue to dark purple */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -65,7 +65,7 @@ button {
 }
 
 button:hover {
-    background-color: #007ba8; /* Darker MYOB color on hover */
+    background-color: #35005f; /* Darker purple color on hover */
 }
 
 .game-over {
@@ -75,7 +75,7 @@ button:hover {
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8);
     padding: 40px;
-    border: 4px solid #00a3e0;
+    border: 4px solid #4b0082;
     text-align: center;
     border-radius: 8px;
 }
@@ -83,7 +83,7 @@ button:hover {
 .game-over h2 {
     font-size: 36px;
     margin-bottom: 20px;
-    color: #00a3e0;
+    color: #4b0082;
 }
 
 .game-over p {
@@ -107,9 +107,9 @@ button:hover {
 }
 
 @keyframes powerUpPulse {
-    0% { border-color: #00a3e0; }
+    0% { border-color: #4b0082; }
     50% { border-color: #ffcc00; }
-    100% { border-color: #00a3e0; }
+    100% { border-color: #4b0082; }
 }
 
 /* Super Power-up animation */

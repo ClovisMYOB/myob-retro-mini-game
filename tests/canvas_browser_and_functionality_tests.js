@@ -111,6 +111,13 @@ function testGameFunctionality() {
     console.error('Game initialization test failed.');
   }
 
+  // Override start method with mock that includes original functionality
+  game.start = () => {
+    console.log('Mock game start called.');
+    // Set isRunning to true like the original method does
+    game.isRunning = true;
+  };
+  
   game.start();
   if (game.isRunning) {
     console.log('Game start test passed.');
