@@ -2,6 +2,9 @@
 
 MYOB Retro Runner is a fast-paced, retro-style 2D endless runner game. Players control a character to jump, attack, and collect coins while avoiding obstacles and enemies. The game features power-ups, high scores, and a nostalgic pixel-art aesthetic.
 
+## Play Now
+Play the game online: [MYOB Retro Runner](https://clovismyob.github.io/myob-retro-mini-game/)
+
 ## Features
 - **Endless Gameplay**: Run as far as you can while avoiding obstacles and enemies.
 - **Power-Ups**: Collect coins to activate temporary invincibility and super abilities.

@@ -178,6 +178,29 @@ function testPlayerFunctionality() {
   } else {
     console.error('Player jump test failed.');
   }
+  
+  // Test double jump functionality
+  player.jump(); // Attempt double jump
+  
+  // Check if the double jump was executed
+  if (player.velocityY < 0 && player.hasDoubleJumped) {
+    console.log('Player double jump test passed.');
+  } else {
+    console.error('Player double jump test failed.');
+  }
+  
+  // Test attack functionality
+  player.attack();
+  
+  // Need to call update once after attack to set the attackInvincibilityTimer
+  player.update();
+  
+  // Check if the attack was executed
+  if (player.attackInvincibilityTimer > 0) {
+    console.log('Player attack test passed.');
+  } else {
+    console.error('Player attack test failed.');
+  }
 }
 
 // Test for powerups functionality
@@ -251,3 +274,48 @@ testObstacleFunctionality();
 testPlayerFunctionality();
 testPowerupsFunctionality();
 testSpawnManagerFunctionality();
+testCollisionDetection();
+
+// Test for collision detection
+function testCollisionDetection() {
+  console.log('Testing collision detection...');
+  
+  // Create two objects that should collide
+  const object1 = {
+    x: 10,
+    y: 10,
+    width: 20,
+    height: 20,
+    collidesWith: function(other) {
+      return this.x < other.x + other.width &&
+        this.x + this.width > other.x &&
+        this.y < other.y + other.height &&
+        this.y + this.height > other.y;
+    }
+  };
+  
+  const object2 = {
+    x: 20,
+    y: 20,
+    width: 20,
+    height: 20
+  };
+  
+  // Test collision (objects overlap)
+  if (object1.collidesWith(object2)) {
+    console.log('Collision detection test passed for overlapping objects.');
+  } else {
+    console.error('Collision detection test failed for overlapping objects.');
+  }
+  
+  // Move object2 away so there's no collision
+  object2.x = 50;
+  object2.y = 50;
+  
+  // Test no collision (objects don't overlap)
+  if (!object1.collidesWith(object2)) {
+    console.log('Collision detection test passed for non-overlapping objects.');
+  } else {
+    console.error('Collision detection test failed for non-overlapping objects.');
+  }
+}

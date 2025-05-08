@@ -342,7 +342,7 @@ class Game {
         this.ctx.font = '18px "Courier New", Courier, monospace';
         this.ctx.fillStyle = '#ffffff'; // White text for better contrast on dark background
         this.ctx.fillText('Press SPACE or UP ARROW to jump', this.canvas.width / 2, this.canvas.height / 2 - 130);
-        this.ctx.fillText('Press SPACE while in mid-air to double jump!', this.canvas.width / 2, this.canvas.height / 2 - 1055);
+        this.ctx.fillText('Press SPACE while in mid-air to double jump!', this.canvas.width / 2, this.canvas.height / 2 - 105);
         this.ctx.fillText('Press SHIFT or RIGHT ARROW to attack', this.canvas.width / 2, this.canvas.height / 2 - 80);
         
         // Add the new attack invincibility instruction with blue color to match the visual effect
